@@ -83,6 +83,53 @@
 			$this->assertEquals([$test_author, $test_author2], $result);
 		}
 
+		function testAddBook()
+		{
+			//Arrange
+			$title = "The General in his Labyrinth";
+			$id = 1;
+			$test_book = new Book($title, $id);
+            $test_book->save();
+
+			$name = "Gabriel Garcia Marquez";
+            $id = 1;
+            $test_author = new Author($name, $id);
+			$test_author->save();
+
+			//Act
+			$test_author->addBook($test_book);
+
+			//Assert
+			$this->assertEquals($test_author->getBooks(), [$test_book]);
+		}
+
+		function testGetBooks()
+        {
+            //Arrange
+			$name = "Gabriel Garcia Marquez";
+            $id = 1;
+            $test_author = new Author($name, $id);
+			$test_author->save();
+
+			$title = "The General in his Labyrinth";
+			$id = 1;
+			$test_book = new Book($title, $id);
+            $test_book->save();
+
+			$title2 = "No One Writes to the Colonel";
+			$id2 = 2;
+			$test_book2 = new Book($title2, $id2);
+            $test_book2->save();
+
+            //Act
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
+
+            //Assert
+            $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
+        }
+
+
 	}
 
 ?>

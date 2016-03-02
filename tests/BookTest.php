@@ -194,26 +194,26 @@
             $this->assertEquals([$test_author, $test_author2], $test_book->getAuthors());
         }
 
-		// function testDeleteBook()
-		// {
-		// 	//Arrange
-		// 	$title = "A Visit from the Goon Squad";
-		// 	$id = 1;
-		// 	$test_book = new Book($title, $id);
-		// 	$test_book->save();
-		//
-		// 	$name = "Jennifer Egan";
-		// 	$id = 2;
-		// 	$test_author = new Author($name, $id);
-		// 	$test_author->save();
-		//
-		// 	//Act
-		// 	$test_book->addAuthor($test_author);
-		// 	$test_book->deleteBook();
-		//
-		// 	//Assert
-		// 	$this->assertEquals([], $test_author->getBooks());
-		// }
+		function testDeleteBook()
+		{
+			//Arrange
+			$title = "A Visit from the Goon Squad";
+			$id = 1;
+			$test_book = new Book($title, $id);
+			$test_book->save();
+
+			$name = "Jennifer Egan";
+			$id = 2;
+			$test_author = new Author($name, $id);
+			$test_author->save();
+
+			//Act
+			$test_book->addAuthor($test_author);
+			$test_book->deleteBook();
+
+			//Assert
+			$this->assertEquals([], $test_author->getBooks());
+		}
 
 	}
 

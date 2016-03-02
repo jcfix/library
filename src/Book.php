@@ -92,6 +92,12 @@
 			return $authors_result;
 		}
 
+		function deleteBook()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+			// $GLOBALS['DB']->exec("DELETE FROM students_books WHERE book_id = {$this->getId()};");
+		}
+
 
 
 
