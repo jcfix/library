@@ -113,7 +113,8 @@
 				$id = $copy['id'];
 				$book_id = $copy['book_id'];
 				$checkout = $copy['checkout'];
-				$new_copy = new Copy($id, $book_id, $checkout);
+				$due_date = $copy['due_date'];
+				$new_copy = new Copy($id, $book_id, $checkout, $due_date);
 				array_push($copy_results, $new_copy);
 			}
 			return $copy_results;

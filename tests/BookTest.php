@@ -226,7 +226,9 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+			$test_copy->save();
 
 			//Act
 			$test_book->addCopy($test_copy);
@@ -241,16 +243,21 @@
 			$title = "Gardners Art Through the Ages";
 			$id = 7;
 			$test_book = new Book($title, $id);
+			$test_book->save();
 
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+			$test_copy->save();
 
 			$id2 = 2;
 			$book_id = $test_book->getId();
 			$checkout2 = 0;
-			$test_copy2 = new Copy($id2, $book_id, $checkout2);
+			$due_date2 = "2016-03-01";
+			$test_copy2 = new Copy($id2, $book_id, $checkout2, $due_date2);
+			$test_copy2->save();
 
 			//Act
 			$test_book->addCopy($test_copy);

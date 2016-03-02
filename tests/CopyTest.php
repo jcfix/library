@@ -31,7 +31,8 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 
 			//Act
 			$result = $test_copy->getId();
@@ -50,7 +51,8 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 
 
 			//Act
@@ -70,13 +72,34 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 
 			//Act
 			$result = $test_copy->getCheckedOut();
 
 			//Assert
 			$this->assertEquals(0, $result);
+		}
+
+		function testGetDueDate()
+		{
+			//Arrange
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+
+			//Act
+			$result = $test_copy->getDueDate();
+
+			//Assert
+			$this->assertEquals("2016-03-02", $result);
 		}
 
 		function testSave()
@@ -89,7 +112,8 @@
 			$id = null;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 
 			//Act
 			$test_copy->save();
@@ -109,13 +133,15 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 			$test_copy->save();
 
 			$id2 = 2;
 			$book_id = $test_book->getId();
 			$checkout2 = 0;
-			$test_copy2 = new Copy($id2, $book_id, $checkout2);
+			$due_date2 = "2016-03-01";
+			$test_copy2 = new Copy($id2, $book_id, $checkout2, $due_date2);
 			$test_copy2->save();
 
 			//Act
@@ -135,13 +161,15 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 			$test_copy->save();
 
 			$id2 = 2;
 			$book_id = $test_book->getId();
 			$checkout2 = 0;
-			$test_copy2 = new Copy($id2, $book_id, $checkout2);
+			$due_date2 = "2016-03-01";
+			$test_copy2 = new Copy($id2, $book_id, $checkout2, $due_date2);
 			$test_copy2->save();
 
 			//Act
@@ -162,7 +190,8 @@
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
-			$test_copy = new Copy($id, $book_id, $checkout);
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
 			$test_copy->save();
 
 			//Act
