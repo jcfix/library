@@ -129,6 +129,25 @@
             $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
         }
 
+		function testFindByAuthor()
+        {
+            //Arrange
+			$name = "Gabriel Garcia Marquez";
+            $id = 1;
+            $test_author = new Author($name, $id);
+			$test_author->save();
+
+			$title = "The General in his Labyrinth";
+			$id = 1;
+			$test_book = new Book($title, $id);
+            $test_book->save();
+
+            //Act
+            $result = Author::findByAuthor($test_author->getName());
+
+            //Assert
+            $this->assertEquals($test_author, $result);
+        }
 
 	}
 

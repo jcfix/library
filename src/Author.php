@@ -66,5 +66,17 @@
 			}
 			return $books;
 		}
+
+		static function findByAuthor($search_name)
+		{
+			$found_author = null;
+			$authors = Author::getAll();
+			foreach($authors as $author) {
+				if ($search_name == $author->getName()) {
+					$found_author = $author;
+				}
+			}
+			return $found_author;
+		}
 	}
  ?>
