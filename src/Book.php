@@ -98,6 +98,27 @@
 			// $GLOBALS['DB']->exec("DELETE FROM books_authors WHERE book_id = {$this->getId()};");
 		}
 
+		function addCopy($book)
+		{
+			$GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALUES ({$book->getId()});");
+		}
+
+		function getCopies()
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+			$copies = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$copy_results = array();
+			foreach($copies as $copy) {
+				$id = $copy['id'];
+				$book_id = $copy['book_id'];
+				$checkout = $copy['checkout'];
+				$new_copy = new Copy($id, $book_id, $checkout);
+				array_push($copy_results, $new_copy);
+			}
+			return $copy_results;
+
+		}
 
 
 
