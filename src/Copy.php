@@ -54,5 +54,10 @@
 			$GLOBALS['DB']->exec("DELETE FROM copies;");
 		}
 
+		function deleteACopy()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$this->getId()};");
+		}
+
 	}
  ?>
