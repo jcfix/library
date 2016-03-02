@@ -40,7 +40,7 @@
 			$title = "Gardners Art Through the Ages";
 			$id = 7;
 			$test_book = new Book($title, $id);
-			
+
 			$id = 1;
 			$book_id = $test_book->getId();
 			$checkout = 0;
@@ -52,7 +52,25 @@
 
 			//Assert
 			$this->assertEquals(7, $result);
+		}
 
+		function testGetCheckedOut()
+		{
+			//Arrange
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$test_copy = new Copy($id, $book_id, $checkout);
+
+			//Act
+			$result = $test_copy->getCheckedOut();
+
+			//Assert
+			$this->assertEquals(0, $result);
 		}
 	}
 

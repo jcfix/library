@@ -23,7 +23,7 @@
 			return $this->book_id;
 		}
 
-		function getCheckout()
+		function getCheckedOut()
 		{
 			return $this->checkout;
 		}
