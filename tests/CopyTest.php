@@ -5,6 +5,7 @@
 	*/
 
 	require_once "src/Copy.php";
+	require_once "src/Book.php";
 
 	$server = 'mysql:host=localhost;dbname=library_test';
 	$user = 'root';
@@ -16,10 +17,15 @@
 		function testGetId()
 		{
 			//Arrange
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+
 			$id = 1;
-			$book_id = 7;
+			$book_id = $test_book->getId();
 			$checkout = 0;
 			$test_copy = new Copy($id, $book_id, $checkout);
+
 
 			//Act
 			$result = $test_copy->getId();
@@ -28,23 +34,26 @@
 			$this->assertEquals(1, $result);
 		}
 
-		// function getBookId()
-		// {
-		// 	//Arrange
-		// 	$title = "Gardners Art Through the Ages";
-		// 	$id = 1;
-		// 	$test_book = new Book($title, $id);
-        //     $test_book->save();
-		//
-        //     $name = "Richard Tansev";
-        //     $id = 1;
-        //     $test_author = new Author($name, $id);
-        //     $test_author->save();
-		//
-		//
-		// 	//Act
-		// 	$result = $test_book->getId();
-		// }
+		function testgetBookId()
+		{
+			//Arrange
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+			
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$test_copy = new Copy($id, $book_id, $checkout);
+
+
+			//Act
+			$result = $test_copy->getBookId();
+
+			//Assert
+			$this->assertEquals(7, $result);
+
+		}
 	}
 
 ?>
