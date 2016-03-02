@@ -39,6 +39,11 @@
 			return $authors;
 		}
 
+		static function deleteAll()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM authors;");
+		}
+
 		function addBook($book)
 		{
 			$GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$book->getId()}, {$this->getId()});");
@@ -56,7 +61,7 @@
 			foreach($book_ids as $book) {
 				$title = $book['title'];
 				$id = $book['id'];
-				$new_book = new Course($title, $id);
+				$new_book = new Book($title, $id);
 				array_push($books, $new_book);
 			}
 			return $books;

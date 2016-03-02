@@ -20,7 +20,7 @@
 		protected function tearDown()
         {
           Book::deleteAll();
-		//   Author::deleteAll();
+		  Author::deleteAll();
         }
 
 		function testGetTitle()

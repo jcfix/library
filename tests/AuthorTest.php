@@ -14,11 +14,11 @@
 
 	class AuthorTest extends PHPUnit_Framework_TestCase
 	{
-		// protected function tearDown()
-        // {
-        //     Author::deleteAll();
-        //     Book::deleteAll();
-        // }
+		protected function tearDown()
+        {
+            Author::deleteAll();
+            Book::deleteAll();
+        }
 
 		function testGetName()
         {
