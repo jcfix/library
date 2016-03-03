@@ -136,72 +136,69 @@
             //Assert
             $this->assertEquals($test_patron, $result);
         }
-		//
-		// function testAddBook()
-		// {
-		// 	//Arrange
-		// 	$title = "The General in his Labyrinth";
-		// 	$id = 1;
-		// 	$test_book = new Book($title, $id);
-        //     $test_book->save();
-		//
-		// 	$name = "Gabriel Garcia Marquez";
-        //     $id = 1;
-        //     $test_author = new Patron($name, $id);
-		// 	$test_author->save();
-		//
-		// 	//Act
-		// 	$test_author->addBook($test_book);
-		//
-		// 	//Assert
-		// 	$this->assertEquals($test_author->getBooks(), [$test_book]);
-		// }
-		//
-		// function testGetBooks()
-        // {
-        //     //Arrange
-		// 	$name = "Gabriel Garcia Marquez";
-        //     $id = 1;
-        //     $test_author = new Patron($name, $id);
-		// 	$test_author->save();
-		//
-		// 	$title = "The General in his Labyrinth";
-		// 	$id = 1;
-		// 	$test_book = new Book($title, $id);
-        //     $test_book->save();
-		//
-		// 	$title2 = "No One Writes to the Colonel";
-		// 	$id2 = 2;
-		// 	$test_book2 = new Book($title2, $id2);
-        //     $test_book2->save();
-		//
-        //     //Act
-        //     $test_author->addBook($test_book);
-        //     $test_author->addBook($test_book2);
-		//
-        //     //Assert
-        //     $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
-        // }
-		//
-		// function testFindByPatron()
-        // {
-        //     //Arrange
-		// 	$name = "Gabriel Garcia Marquez";
-        //     $id = 1;
-        //     $test_author = new Patron($name, $id);
-		// 	$test_author->save();
-		//
-		// 	$title = "The General in his Labyrinth";
-		// 	$id = 1;
-		// 	$test_book = new Book($title, $id);
-        //     $test_book->save();
-		//
-        //     //Act
-        //     $result = Patron::findByPatron($test_author->getName());
-		//
-        //     //Assert
-        //     $this->assertEquals($test_author, $result);
-        // }
+
+		function testAddPatronCopy()
+		{
+			//Arrange
+			$name = "Jessica Fix";
+			$id = 1;
+			$test_patron = new Patron($name, $id);
+			$test_patron->save();
+
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+			$test_book->save();
+
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+			$test_copy->save();
+
+			//Act
+			$test_patron->addPatronCopy($test_copy->getId());
+
+			//Assert
+			$this->assertEquals([$test_copy], $test_patron->getPatronCopies());
+		}
+
+		function testGetPatronCopies()
+        {
+            //Arrange
+			$name = "Jessica Fix";
+			$id = 1;
+			$test_patron = new Patron($name, $id);
+			$test_patron->save();
+
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+			$test_book->save();
+
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+			$test_copy->save();
+
+			$id2 = 2;
+			$book_id = $test_book->getId();
+			$checkout2 = 0;
+			$due_date2 = "2016-03-01";
+			$test_copy2 = new Copy($id2, $book_id, $checkout2, $due_date2);
+			$test_copy2->save();
+
+            //Act
+            $test_patron->addPatronCopy($test_copy->getId());
+            $test_patron->addPatronCopy($test_copy2->getId());
+
+            //Assert
+            $this->assertEquals([$test_copy, $test_copy2], $test_patron->getPatronCopies());
+        }
+
 
 	}
 

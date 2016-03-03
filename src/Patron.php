@@ -68,6 +68,34 @@
 			return $found_patron;
 		}
 
+		function addPatronCopy($copy)
+		{
+			$GLOBALS['DB']->exec("INSERT INTO checkouts (patron_id, copy_id) VALUES ({$this->getId()}, {$copy});");
+		}
+
+		function getPatronCopies()
+		{
+			$query = $GLOBALS['DB']->query("SELECT copies.* FROM patrons
+				JOIN checkouts ON (patrons.id = checkouts.patron_id)
+				JOIN copies ON (checkouts.copy_id = copies.id)
+				WHERE patrons.id = {$this->getId()};");
+
+			$patron_copies = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$patron_copies_results = array();
+
+			foreach($patron_copies as $patron_copy) {
+				$id = $patron_copy['id'];
+				$book_id = $patron_copy['book_id'];
+				$checkout = $patron_copy['checkout'];
+				$due_date = $patron_copy['due_date'];
+				$new_patron_copy = new Copy($id, $book_id, $checkout, $due_date);
+				array_push($patron_copies_results, $new_patron_copy);
+			}
+			return $patron_copies_results;
+
+		}
+
 
 
 		// function addBook($book)

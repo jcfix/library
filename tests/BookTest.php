@@ -222,6 +222,7 @@
 			$title = "Gardners Art Through the Ages";
 			$id = 7;
 			$test_book = new Book($title, $id);
+			$test_book->save();
 
 			$id = 1;
 			$book_id = $test_book->getId();
