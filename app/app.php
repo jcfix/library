@@ -3,6 +3,8 @@
 	require_once __DIR__.'/../vendor/autoload.php';
 	require_once __DIR__."/../src/Book.php";
   	require_once __DIR__."/../src/Author.php";
+	require_once __DIR__."/../src/Copy.php";
+	require_once __DIR__."/../src/Patron.php";
 
 	$app = new Silex\Application();
 
@@ -58,11 +60,27 @@
 		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()));
 	});
 
+	// Deletes all books
 	$app->post('/delete_all_books', function() use ($app) {
 		Book::deleteAll();
 		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()
 	  ));
 	});
+
+	$app->post('/book/{id}/add_copy', function($id) use ($app) {
+		$book = Book::find($id);
+		$book_id = $book->getId();
+		$new_copy = new Copy($id = null, $book_id, $_POST['checkout'], $_POST['date']);
+		$new_copy->save();
+		$book->addCopy($new_copy);
+		return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copies' => $book->getCopies()
+	  ));
+	});
+
+	// private $id;
+	// private $book_id;
+	// private $checkout;
+	// private $due_date;
 
 
 	return $app;
