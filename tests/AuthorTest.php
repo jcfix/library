@@ -149,6 +149,27 @@
             $this->assertEquals($test_author, $result);
         }
 
+		function testDeleteAll()
+		{
+			//Arrange
+			$name = "Junot Diaz";
+            $id = 1;
+            $test_author = new Author($name, $id);
+			$test_author->save();
+
+			$name2 = "Gabriel Garcia Marquez";
+			$id2 = 2;
+			$test_author2 = new Author($name2, $id2);
+			$test_author2->save();
+
+			//Act
+			Author::deleteAll();
+			$result = Author::getAll();
+
+			//Assert
+			$this->assertEquals([], $result);
+		}
+
 	}
 
 ?>
