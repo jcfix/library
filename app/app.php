@@ -67,6 +67,7 @@
 	  ));
 	});
 
+	// Adds a copy of a book
 	$app->post('/book/{id}/add_copy', function($id) use ($app) {
 		$book = Book::find($id);
 		$book_id = $book->getId();
@@ -75,6 +76,12 @@
 		$book->addCopy($new_copy);
 		return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copies' => $book->getCopies()
 	  ));
+	});
+
+	// Go to copy edit page
+	$app->get('/copy/{{ copy.getId }}/edit', function($id) use ($app) {
+		$copy = Copy::find($id);
+		return $app['twig']->render('copy_edit.html.twig', array('copy' => $copy));
 	});
 
 	// private $id;

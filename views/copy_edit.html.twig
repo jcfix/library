@@ -12,22 +12,11 @@
   <body>
         <div class="container">
             <h2>{{ book.getTitle }}</h2>
-            {% if authors is not empty %}
-            <ul>
-                {% for author in authors %}
-                    <li>{{ author.getName }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% if copies is not empty %}
-            <ul>
-                {% for copy in copies %}
-                    <a href="/copy/{{ copy.getId }}/edit"><li> Copy {{ copy.getId }}</li></a>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            <p>Number of copies: {{ book.getCopies }}</p>
-            <div class="add-features">
+            <h3>{{ copy.getId }}</h3>
+            <p>{{ copy.getDueDate }}</p>
+            <p>{{ copy.getCheckedOut }}</p>
+
+            <!-- <div class="add-features">
                 <div class="row">
                     <div class="col s6">
                         <h5>Add Author</h5>
@@ -68,7 +57,7 @@
             <br>
             <br>
             <br>
-            <a href="/librarian" type="submit" class="waves-effect waves-light btn-large" name="button">Return</a>
+            <a href="/librarian" type="submit" class="waves-effect waves-light btn-large" name="button">Return</a> -->
         </div>
   </body>
 </html>
