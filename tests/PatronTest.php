@@ -16,11 +16,12 @@
 
 	class PatronTest extends PHPUnit_Framework_TestCase
 	{
-		// protected function tearDown()
-        // {
-        //     Patron::deleteAll();
-        //     Book::deleteAll();
-        // }
+		protected function tearDown()
+        {
+            Patron::deleteAll();
+            Book::deleteAll();
+			Copy::deleteAll();
+        }
 
 		function testGetName()
         {
@@ -49,41 +50,62 @@
 			//Assert
 			$this->assertEquals(1, $result);
 		}
-		//
-		// function testSave()
-		// {
-		// 	//Arrange
-		// 	$name = "Junot Diaz";
-        //     $id = 1;
-        //     $test_author = new Patron($name, $id);
-		//
-		// 	//Act
-		// 	$test_author->save();
-		//
-		// 	//Assert
-		// 	$result = Patron::getAll();
-		// 	$this->assertEquals($test_author, $result[0]);
-		// }
-		//
-		// function testGetAll()
-		// {
-		// 	//Arrange
-		// 	$name = "Junot Diaz";
-        //     $id = 1;
-        //     $test_author = new Patron($name, $id);
-		// 	$test_author->save();
-		//
-		// 	$name2 = "Gabriel Garcia Marquez";
-		// 	$id2 = 2;
-		// 	$test_author2 = new Patron($name2, $id2);
-		// 	$test_author2->save();
-		//
-		// 	//Act
-		// 	$result = Patron::getAll();
-		//
-		// 	//Assert
-		// 	$this->assertEquals([$test_author, $test_author2], $result);
-		// }
+
+		function testSave()
+		{
+			//Arrange
+			$name = "Jessica Fix";
+            $id = 1;
+            $test_patron = new Patron($name, $id);
+
+			//Act
+			$test_patron->save();
+
+			//Assert
+			$result = Patron::getAll();
+			$this->assertEquals($test_patron, $result[0]);
+		}
+
+		function testGetAll()
+		{
+			//Arrange
+			$name = "Jessica Fix";
+            $id = 1;
+            $test_patron = new Patron($name, $id);
+			$test_patron->save();
+
+			$name2 = "Ryan Brown";
+			$id2 = 2;
+			$test_patron2 = new Patron($name2, $id2);
+			$test_patron2->save();
+
+			//Act
+			$result = Patron::getAll();
+
+			//Assert
+			$this->assertEquals([$test_patron, $test_patron2], $result);
+		}
+
+		function testDeleteAll()
+		{
+			//Arrange
+			$name = "Jessica Fix";
+            $id = 1;
+            $test_patron = new Patron($name, $id);
+			$test_patron->save();
+
+			$name2 = "Ryan Brown";
+			$id2 = 2;
+			$test_patron2 = new Patron($name2, $id2);
+			$test_patron2->save();
+
+			//Act
+			Patron::deleteAll();
+			$result = Patron::getAll();
+
+			//Assert
+			$this->assertEquals([], $result);
+		}
 		//
 		// function testAddBook()
 		// {

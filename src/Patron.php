@@ -20,30 +20,30 @@
             return $this->id;
         }
 
-		// function save()
-		// {
-		// 	$GLOBALS['DB']->exec("INSERT INTO authors (name) VALUES ('{$this->getName()}');");
-		// 	$this->id = $GLOBALS['DB']->lastInsertId();
-		// }
-		//
-		// static function getAll()
-		// {
-		// 	$query = $GLOBALS['DB']->query("SELECT * FROM authors;");
-		// 	$authors = array();
-		// 	foreach($query as $author) {
-		// 		$name = $author['name'];
-		// 		$id = $author['id'];
-		// 		$new_author = new Patron($name, $id);
-		// 		array_push($authors, $new_author);
-		// 	}
-		// 	return $authors;
-		// }
-		//
-		// static function deleteAll()
-		// {
-		// 	$GLOBALS['DB']->exec("DELETE FROM authors;");
-		// }
-		//
+		function save()
+		{
+			$GLOBALS['DB']->exec("INSERT INTO patrons (name) VALUES ('{$this->getName()}');");
+			$this->id = $GLOBALS['DB']->lastInsertId();
+		}
+
+		static function getAll()
+		{
+			$query = $GLOBALS['DB']->query("SELECT * FROM patrons;");
+			$patrons = array();
+			foreach($query as $patron) {
+				$name = $patron['name'];
+				$id = $patron['id'];
+				$new_patron = new Patron($name, $id);
+				array_push($patrons, $new_patron);
+			}
+			return $patrons;
+		}
+
+		static function deleteAll()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM patrons;");
+		}
+		
 		// function addBook($book)
 		// {
 		// 	$GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$book->getId()}, {$this->getId()});");
