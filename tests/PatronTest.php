@@ -106,6 +106,36 @@
 			//Assert
 			$this->assertEquals([], $result);
 		}
+
+		function testFind()
+        {
+            //Arrange
+			$name = "Jessica Fix";
+			$id = 1;
+			$test_patron = new Patron($name, $id);
+			$test_patron->save();
+
+            //Act
+            $result = Patron::find($test_patron->getId());
+
+            //Assert
+            $this->assertEquals($test_patron, $result);
+        }
+
+		function testFindByName()
+        {
+            //Arrange
+			$name = "Jessica Fix";
+			$id = 1;
+			$test_patron = new Patron($name, $id);
+			$test_patron->save();
+
+            //Act
+            $result = Patron::findByName($test_patron->getName());
+
+            //Assert
+            $this->assertEquals($test_patron, $result);
+        }
 		//
 		// function testAddBook()
 		// {

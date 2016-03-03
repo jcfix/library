@@ -4,7 +4,7 @@
 		private $name;
 		private $id;
 
-		function __construct($name, $id)
+		function __construct($name, $id = null)
 		{
 			$this->name = $name;
 			$this->id = $id;
@@ -43,7 +43,33 @@
 		{
 			$GLOBALS['DB']->exec("DELETE FROM patrons;");
 		}
-		
+
+		static function find($search_id)
+		{
+			$found_patron = null;
+			$patrons = Patron::getAll();
+			foreach($patrons as $patron) {
+				if($search_id == $patron->getId()) {
+					$found_patron = $patron;
+				}
+			}
+			return $found_patron;
+		}
+
+		static function findByName($search_name)
+		{
+			$found_patron = null;
+			$patrons = Patron::getAll();
+			foreach($patrons as $patron) {
+				if($search_name == $patron->getName()) {
+					$found_patron = $patron;
+				}
+			}
+			return $found_patron;
+		}
+
+
+
 		// function addBook($book)
 		// {
 		// 	$GLOBALS['DB']->exec("INSERT INTO books_authors (book_id, author_id) VALUES ({$book->getId()}, {$this->getId()});");
