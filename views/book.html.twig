@@ -11,19 +11,24 @@
   <body>
       <div class="container">
           <h2>{{ book.getTitle }}</h2>
-          {% if book is not empty %}
+          {% if authors is not empty %}
             <ul>
-                {% for book in book %}
-                    <li>{{ book.getTitle }}</li>
+                {% for author in authors %}
+                    <li>{{ author.getName }}</li>
                 {% endfor %}
             </ul>
-                {% else %}
-                    <p>There are no books listed in this library...</p>
           {% endif %}
 
 
+        <h5>Add Author</h5>
+        <form action="/book/{{ book.getId }}/add_author" method="post" class="form-group">
+            <label for="name">Author name:</label>
+            <input type="text" name="name" id="name" class="form-control">
+            </br>
+            <button type="submit" class="waves-effect waves-light btn-large" name="button">Submit</button>
+        </form>
 
-
+        <br>
         <h5>Delete Book</h5>
         <form action="/book/{{ book.getId }}/delete" method="post" class="form-group">
             <input name="_method" type="hidden" value="delete">

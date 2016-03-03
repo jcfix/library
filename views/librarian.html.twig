@@ -10,10 +10,11 @@
   </head>
   <body>
       <div class="container">
+          <h2>Books:</h2>
           {% if books is not empty %}
             <ul>
                 {% for book in books %}
-                    <li>{{ book.getTitle }}</li>
+                    <a href="/book/{{ book.getId }}"><li>{{ book.getTitle }}</li></a>
                 {% endfor %}
             </ul>
                 {% else %}
@@ -25,7 +26,7 @@
             <input type="text" name="title" id="title" class="form-control">
             </br>
             <button type="submit" class="waves-effect waves-light btn-large" name="button">Submit</button>
-        </form>    
+        </form>
       </div>
   </body>
 </html>
