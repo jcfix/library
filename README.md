@@ -5,6 +5,9 @@
 
 ## Description
 
+Notes: Finished building back-end functionality. (Purposely left out update features, but feel free to add them if needed).
+
+No UI built yet...
 
 
 ## Setup
