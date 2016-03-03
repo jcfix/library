@@ -58,6 +58,12 @@
 		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()));
 	});
 
+	$app->post('/delete_all_books', function() use ($app) {
+		Book::deleteAll();
+		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()
+	  ));
+	});
+
 
 	return $app;
 
