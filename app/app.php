@@ -23,6 +23,16 @@
 		return $app['twig']->render('index.html.twig');
 	});
 
+	$app->get('/librarian', function() use ($app) {
+		return $app['twig']->render('librarian.html.twig');
+	});
+
+	$app->post('/add_book', function() use ($app) {
+		$new_book = new Book($_POST['title']);
+		$new_book->save();
+		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()
+	  ));
+	});
 
 
 	return $app;
