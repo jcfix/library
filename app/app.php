@@ -100,10 +100,11 @@
 
 
 	// Update copy
-	$app->patch('/book/{id}/edit', function($id) use ($app) {
-		$copy = Copy::find($id);
-		$
-	});
+	// $app->patch('/book/{id}/edit', function($id) use ($app) {
+	// 	$new_title = $_POST['title']
+	// 	$copy = Copy::find($id);
+	//
+	// });
 
 	return $app;
 
