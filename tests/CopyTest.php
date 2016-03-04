@@ -201,6 +201,86 @@
 			$this->assertEquals([], $test_book->getCopies());
 		}
 
+		function testFind()
+        {
+            //Arrange
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+			$test_copy->save();
+
+			$id2 = 2;
+			$book_id = $test_book->getId();
+			$checkout2 = 0;
+			$due_date2 = "2016-03-01";
+			$test_copy2 = new Copy($id2, $book_id, $checkout2, $due_date2);
+			$test_copy2->save();
+
+            //Act
+            $result = Copy::find($test_copy->getId());
+
+            //Assert
+            $this->assertEquals($test_copy, $result);
+        }
+
+		function testGetBook()
+		{
+			//Arrange
+			$title = "Gardners Art Through the Ages";
+			$id = 7;
+			$test_book = new Book($title, $id);
+			$test_book->save();
+
+			$id = 1;
+			$book_id = $test_book->getId();
+			$checkout = 0;
+			$due_date = "2016-03-02";
+			$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+			$test_copy->save();
+
+			//Act
+			$test_copy->getBook($test_book);
+
+			//Assert
+			$this->assertEquals([$test_book], $test_copy->getBook());
+		}
+
+		// function testGetCopies()
+		// {
+		// 	//Arrange
+		// 	$title = "Gardners Art Through the Ages";
+		// 	$id = 7;
+		// 	$test_book = new Book($title, $id);
+		// 	$test_book->save();
+		//
+		// 	$id = 1;
+		// 	$book_id = $test_book->getId();
+		// 	$checkout = 0;
+		// 	$due_date = "2016-03-02";
+		// 	$test_copy = new Copy($id, $book_id, $checkout, $due_date);
+		// 	$test_copy->save();
+		//
+		// 	$id2 = 2;
+		// 	$book_id = $test_book->getId();
+		// 	$checkout2 = 0;
+		// 	$due_date2 = "2016-03-01";
+		// 	$test_copy2 = new Copy($id2, $book_id, $checkout2, $due_date2);
+		// 	$test_copy2->save();
+		//
+		// 	//Act
+		// 	$test_book->addCopy($test_copy);
+		// 	$test_book->addCopy($test_copy2);
+		//
+		// 	//Assert
+		// 	$this->assertEquals([$test_copy, $test_copy2], $test_book->getCopies());
+		// }
+
 	}
 
 ?>

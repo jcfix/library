@@ -8,6 +8,8 @@
 
 	$app = new Silex\Application();
 
+	// $app['debug'] = true;
+
 	$app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
 
 	// Setup server for database
@@ -41,7 +43,7 @@
 	// Get specific book page with add-author form
 	$app->get('/book/{id}', function($id) use ($app) {
 		$book = Book::find($id);
-		return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors()));
+		return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copies' => $book->getCopies()));
 	});
 
 	// Post an author to a specific book
@@ -53,21 +55,21 @@
 		return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors()));
 	});
 
-	// Remove a specific book from library
+	// Delete a specific book from library
 	$app->delete('/book/{id}/delete', function($id) use ($app) {
 		$book = Book::find($id);
 		$book->deleteBook();
 		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()));
 	});
 
-	// Deletes all books
+	// Delete all books
 	$app->post('/delete_all_books', function() use ($app) {
 		Book::deleteAll();
 		return $app['twig']->render('librarian.html.twig', array('books' => Book::getAll()
 	  ));
 	});
 
-	// Adds a copy of a book
+	// Add a copy of a book
 	$app->post('/book/{id}/add_copy', function($id) use ($app) {
 		$book = Book::find($id);
 		$book_id = $book->getId();
@@ -79,16 +81,29 @@
 	});
 
 	// Go to copy edit page
-	$app->get('/copy/{{ copy.getId }}/edit', function($id) use ($app) {
+	$app->get('/copy/{id}/edit', function($id) use ($app) {
 		$copy = Copy::find($id);
-		return $app['twig']->render('copy_edit.html.twig', array('copy' => $copy));
+		$book = $copy->getBook($copy->getBookId());
+		return $app['twig']->render('copy_edit.html.twig', array('copy' => $copy, 'book' => $book));
 	});
 
-	// private $id;
-	// private $book_id;
-	// private $checkout;
-	// private $due_date;
+	// Remove single copy
+	$app->delete('/book/{book_id}/copy/{id}/delete', function($book_id, $id) use ($app) {
+		$book = Book::find($book_id);
+		$copy = Copy::find($id);
+		// $copy->getBook($book_id);
+		$copy->deleteACopy();
+		return $app['twig']->render('book.html.twig', array('book' => $book, 'authors' => $book->getAuthors(), 'copies' => $book->getCopies()
 
+	  ));
+	});
+
+
+	// Update copy
+	$app->patch('/book/{id}/edit', function($id) use ($app) {
+		$copy = Copy::find($id);
+		$
+	});
 
 	return $app;
 

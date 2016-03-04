@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-    <link rel="stylesheet" href="/css/styles.css" media="all">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <meta charset="utf-8">
-    <title>Library</title>
-  </head>
-  <body>
-      <div class="container">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+        <link rel="stylesheet" href="/css/styles.css" media="all">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <meta charset="utf-8">
+        <title>Library</title>
+    </head>
+    <body>
+        <div class="container">
           <h2>Books:</h2>
           {% if books is not empty %}
             <ul>
@@ -21,16 +21,18 @@
                     <p>There are no books listed in this library...</p>
           {% endif %}
 
-        <form action="/add_book" method="post" class="form-group">
-            <label for="title">Book title:</label>
-            <input type="text" name="title" id="title" class="form-control">
-            </br>
-            <button type="submit" class="waves-effect waves-light btn-large" name="button">Submit</button>
-        </form>
-        <br>
-        <form action="/delete_all_books" method="post" class='form-group'>
-            <button type="submit" class="waves-effect waves-light btn-large" name="button">Delete all</button>
-        </form>
-      </div>
-  </body>
+            <form action="/add_book" method="post" class="form-group">
+                <label for="title">Book title:</label>
+                <input type="text" name="title" id="title" class="form-control">
+                </br>
+                <button type="submit" class="waves-effect waves-light btn-large" name="button">Submit</button>
+            </form>
+            <br>
+            <form action="/delete_all_books" method="post" class='form-group'>
+                <button type="submit" class="waves-effect waves-light btn-large" name="button">Delete all</button>
+            </form>
+            <br>
+            <a href="/" type="submit" class="waves-effect waves-light btn-large">Home</a>
+        </div>
+    </body>
 </html>

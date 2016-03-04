@@ -64,7 +64,65 @@
 		function deleteACopy()
 		{
 			$GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$this->getId()};");
+			$GLOBALS['DB']->exec("DELETE FROM checkouts WHERE copy_id = {$this->getId()};");
 		}
+
+		static function find($search_id)
+		{
+			$found_copy = null;
+			$copies = Copy::getAll();
+			foreach($copies as $copy) {
+				if($search_id == $copy->getId()) {
+					$found_copy = $copy;
+				}
+			}
+			return $found_copy;
+		}
+
+		function getBook($book_id)
+		{
+			return Book::find($book_id);
+		}
+
+			//GOAL: get a book from a copy.
+			// copies table book_id and take it out and scan it on book table for a matching id.
+//
+// 			SELECT copies.* FROM books
+// 			JOIN ON books.id = copies.book_id
+// 			WHERE copy.id = {$this->getId()}
+//
+// 			$query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$book->getId()};");
+// 			$books = $query->fetchAll(PDO::FETCH_ASSOC);
+// var_dump($query);
+// 			$book_results = array();
+// 			foreach($books as $book) {
+// 				$title = $book['title'];
+// 				$id = $book['id'];
+// 				$new_book = new Book($title, $id);
+// 				array_push($book_results, $new_book);
+// 			}
+// 			return $book_results;
+
+
+
+		//
+		// function getCopies()
+		// {
+		// 	$query = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+		// 	$copies = $query->fetchAll(PDO::FETCH_ASSOC);
+		//
+		// 	$copy_results = array();
+		// 	foreach($copies as $copy) {
+		// 		$id = $copy['id'];
+		// 		$book_id = $copy['book_id'];
+		// 		$checkout = $copy['checkout'];
+		// 		$due_date = $copy['due_date'];
+		// 		$new_copy = new Copy($id, $book_id, $checkout, $due_date);
+		// 		array_push($copy_results, $new_copy);
+		// 	}
+		// 	return $copy_results;
+		//
+		// }
 
 	}
  ?>
